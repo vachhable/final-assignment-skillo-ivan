@@ -80,12 +80,4 @@ public class TestObject {
     protected WebDriver getDriver() {
         return driver;
     }
-
-
-    @DataProvider(name = "getUsers")
-    public Object [][] getUsers() {
-        return new Object[][]{{"IvanPenchev2", "IvanPenchev123"}
-
-        };
-    }
 }

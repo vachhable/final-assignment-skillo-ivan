@@ -6,10 +6,17 @@ import object.PostPage;
 import object.Header;
 import object.LoginPage;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class SearchTest extends TestObject {
-    @Test (dataProvider = "getUsers", invocationCount = 1)
+    @DataProvider(name = "getUsers")
+    public Object [][] getUsers() {
+        return new Object[][]{{"IvanPenchev2", "IvanPenchev123"}
+
+        };
+    }
+    @Test (dataProvider = "getUsers")
     public void testSearchFieldFromHomeAsLoggedInUser(String username, String password) {
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
@@ -29,7 +36,7 @@ public class SearchTest extends TestObject {
         UserPage userPage = new UserPage(getDriver());
         userPage.isUrlLoaded();
     }
-    @Test(dataProvider = "getUsers", priority = 1, invocationCount = 1)
+    @Test(dataProvider = "getUsers", priority = 1)
     public void testSearchFieldFromProfileAsLoggedInUser(String username, String password){
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
@@ -55,7 +62,7 @@ public class SearchTest extends TestObject {
 
     }
 
-    @Test(dataProvider = "getUsers", priority = 2, invocationCount = 1)
+    @Test(dataProvider = "getUsers", priority = 2)
     public void testSearchFieldFromPostPageAsLoggedInUser(String username, String password){
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
@@ -83,7 +90,7 @@ public class SearchTest extends TestObject {
         userPage.isUrlLoaded();
 
     }
-    @Test (priority = 3, invocationCount = 1)
+    @Test (priority = 3)
     public void testSearchFieldFromHomeAsAnonymousUser() {
         HomePage homePage = new HomePage(getDriver());
         homePage.navigateTo();
@@ -92,7 +99,7 @@ public class SearchTest extends TestObject {
         Assert.assertFalse(header.isSearchFieldVisible(), "Search field is visible as anonymous!");
     }
 
-    @Test (dataProvider = "getUsers", priority = 4, invocationCount = 1)
+    @Test (dataProvider = "getUsers", priority = 4)
     public void testSearchFieldAsLoggedInUserWithStrangeSymbols(String username, String password){
         LoginPage loginPage = new LoginPage(getDriver());
         loginPage.navigateTo();
